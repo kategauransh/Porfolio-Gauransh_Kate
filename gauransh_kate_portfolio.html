@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gauransh Kate — Java Full Stack Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0b0e;
+    --surface: #111318;
+    --surface2: #181b22;
+    --accent: #4fffb0;
+    --accent2: #00bfff;
+    --text: #f0f2f5;
+    --muted: #7a8394;
+    --border: rgba(255,255,255,0.07);
+    --card-bg: rgba(255,255,255,0.03);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 4rem;
+    background: rgba(10,11,14,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.2rem;
+    color: var(--accent); letter-spacing: -0.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.875rem; font-weight: 400; letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-grid-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(79,255,176,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(79,255,176,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-glow {
+    position: absolute; top: -20%; right: -10%;
+    width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(79,255,176,0.06) 0%, transparent 70%);
+    z-index: 0;
+  }
+  .hero-glow2 {
+    position: absolute; bottom: -10%; left: 10%;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,191,255,0.05) 0%, transparent 70%);
+    z-index: 0;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(79,255,176,0.08); border: 1px solid rgba(79,255,176,0.2);
+    color: var(--accent); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.4rem 1rem; border-radius: 2rem; margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-tag::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); animation: pulse 2s ease infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 800; line-height: 1;
+    letter-spacing: -0.03em;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero-name span { color: var(--accent); }
+  .hero-sub {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--muted); font-weight: 300;
+    margin: 1.5rem 0 2.5rem;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-sub strong { color: var(--text); font-weight: 500; }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent); color: #0a0b0e;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; font-weight: 500;
+    padding: 0.85rem 2rem; border-radius: 0.5rem;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(79,255,176,0.3); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent; color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; font-weight: 400;
+    padding: 0.85rem 2rem; border-radius: 0.5rem;
+    text-decoration: none; border: 1px solid var(--border);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.2); background: var(--card-bg); }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+
+  /* SECTIONS */
+  section { padding: 6rem 4rem; }
+  .section-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700; letter-spacing: -0.02em; line-height: 1.15;
+    margin-bottom: 1rem; color: var(--text);
+  }
+  .section-desc { color: var(--muted); max-width: 520px; margin-bottom: 3rem; }
+
+  /* ABOUT */
+  .about-layout {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+  .about-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .stat-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 1rem; padding: 1.5rem;
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.2rem; font-weight: 800;
+    color: var(--accent); line-height: 1;
+  }
+  .stat-label { color: var(--muted); font-size: 0.85rem; margin-top: 0.4rem; }
+  .about-info { display: flex; flex-direction: column; gap: 1rem; }
+  .info-row {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 0.75rem;
+  }
+  .info-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    background: rgba(79,255,176,0.1); border-radius: 0.5rem;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+  .info-text { display: flex; flex-direction: column; }
+  .info-key { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+  .info-val { font-size: 0.95rem; color: var(--text); font-weight: 400; }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;
+  }
+  .skill-category {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 1rem; padding: 1.75rem;
+  }
+  .skill-cat-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .skill-tag {
+    background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+    color: var(--text); font-size: 0.85rem; padding: 0.35rem 0.9rem;
+    border-radius: 2rem; transition: background 0.2s, border-color 0.2s;
+  }
+  .skill-tag:hover { background: rgba(79,255,176,0.08); border-color: rgba(79,255,176,0.3); }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 1.25rem; padding: 2rem;
+    position: relative; overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0; transition: opacity 0.2s;
+  }
+  .project-card:hover { border-color: rgba(79,255,176,0.2); transform: translateY(-4px); }
+  .project-card:hover::before { opacity: 1; }
+  .project-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem; color: var(--accent); letter-spacing: 0.1em;
+    margin-bottom: 1rem; display: block;
+  }
+  .project-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem; font-weight: 700; color: var(--text);
+    margin-bottom: 0.5rem; letter-spacing: -0.01em;
+  }
+  .project-subtitle {
+    font-size: 0.85rem; color: var(--muted); margin-bottom: 1.25rem;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .project-desc { color: var(--muted); font-size: 0.95rem; line-height: 1.65; margin-bottom: 1.5rem; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .stack-badge {
+    background: rgba(0,191,255,0.08); border: 1px solid rgba(0,191,255,0.15);
+    color: #7ecfff; font-size: 0.78rem; padding: 0.25rem 0.75rem;
+    border-radius: 0.4rem; font-family: 'DM Sans', sans-serif;
+  }
+
+  /* EDUCATION & CERTS */
+  .timeline { display: flex; flex-direction: column; gap: 1.5rem; }
+  .timeline-item {
+    display: grid; grid-template-columns: 1fr 3fr; gap: 2rem;
+    padding: 1.75rem; background: var(--card-bg);
+    border: 1px solid var(--border); border-radius: 1rem;
+    align-items: start;
+  }
+  .timeline-year {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem; color: var(--accent); letter-spacing: 0.08em;
+    text-transform: uppercase; padding-top: 0.25rem;
+  }
+  .timeline-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem; font-weight: 600; color: var(--text); margin-bottom: 0.25rem;
+  }
+  .timeline-inst { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.5rem; }
+  .timeline-grade {
+    display: inline-block;
+    background: rgba(79,255,176,0.08); border: 1px solid rgba(79,255,176,0.2);
+    color: var(--accent); font-size: 0.78rem; padding: 0.2rem 0.7rem; border-radius: 0.4rem;
+  }
+
+  .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+  .cert-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 1rem; padding: 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .cert-icon {
+    width: 44px; height: 44px; flex-shrink: 0;
+    background: rgba(79,255,176,0.1); border-radius: 0.75rem;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+  }
+  .cert-name {
+    font-size: 0.95rem; font-weight: 500; color: var(--text); line-height: 1.3;
+  }
+  .cert-issuer { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+  }
+  .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.25rem; background: var(--card-bg);
+    border: 1px solid var(--border); border-radius: 0.75rem;
+    text-decoration: none; color: var(--text);
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .contact-link:hover { border-color: rgba(79,255,176,0.3); transform: translateX(4px); }
+  .contact-link-icon {
+    width: 40px; height: 40px; flex-shrink: 0;
+    background: rgba(79,255,176,0.1); border-radius: 0.5rem;
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+  }
+  .contact-link-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .contact-link-val { font-size: 0.95rem; color: var(--text); }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 4rem; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--muted); font-size: 0.85rem;
+  }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 0 1.5rem; }
+    .about-layout, .contact-layout { grid-template-columns: 1fr; gap: 2rem; }
+    .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">GK.</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Available for full-time roles</div>
+    <h1 class="hero-name">Gauransh<br /><span>Kate</span></h1>
+    <p class="hero-sub">
+      <strong>Java Full Stack Developer</strong> — building scalable backend systems<br />
+      with Spring Boot, REST APIs, React &amp; SQL.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">View Projects →</a>
+      <a href="#contact" class="btn-secondary">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-layout">
+    <div class="reveal">
+      <div class="section-label">About me</div>
+      <h2 class="section-title">Passionate about clean, scalable code</h2>
+      <p style="color:var(--muted); line-height:1.8; margin-bottom:1.5rem;">
+        I'm a Java Full Stack Developer with a B.E. in Information Technology from Pune. I've completed intensive training in Core Java, Spring Boot, REST APIs, and React — with a deep focus on performance optimization, memory management, and building production-ready systems.
+      </p>
+      <p style="color:var(--muted); line-height:1.8;">
+        I love bridging the gap between backend robustness and a seamless front-end experience, always aiming for clean architecture and efficient code.
+      </p>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Full-stack projects delivered</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">6+</div>
+          <div class="stat-label">Technologies mastered</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Certifications earned</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">B.E.</div>
+          <div class="stat-label">Information Technology, Pune</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-info reveal">
+      <div class="info-row">
+        <div class="info-icon">📍</div>
+        <div class="info-text">
+          <span class="info-key">Location</span>
+          <span class="info-val">Hyderabad, Telangana</span>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🎓</div>
+        <div class="info-text">
+          <span class="info-key">Degree</span>
+          <span class="info-val">B.E. in Information Technology — 2025</span>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🏫</div>
+        <div class="info-text">
+          <span class="info-key">Training</span>
+          <span class="info-val">Java Full Stack Developer — Naresh IT, Hyderabad</span>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">✉️</div>
+        <div class="info-text">
+          <span class="info-key">Email</span>
+          <span class="info-val">gauranshkate.it@gmail.com</span>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">📱</div>
+        <div class="info-text">
+          <span class="info-key">Phone</span>
+          <span class="info-val">+91 88153 83700</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label reveal">Technical skills</div>
+  <h2 class="section-title reveal">Tools &amp; Technologies</h2>
+  <p class="section-desc reveal">A curated stack spanning backend systems, frontend interfaces, and database management.</p>
+  <div class="skills-grid">
+    <div class="skill-category reveal">
+      <div class="skill-cat-title">Languages</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Java (Core)</span>
+        <span class="skill-tag">Java 8</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">JavaScript</span>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <div class="skill-cat-title">Backend</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Spring Boot</span>
+        <span class="skill-tag">RESTful APIs</span>
+        <span class="skill-tag">Spring AI</span>
+        <span class="skill-tag">JDBC</span>
+        <span class="skill-tag">AWS S3</span>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <div class="skill-cat-title">Frontend</div>
+      <div class="skill-tags">
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">HTML5</span>
+        <span class="skill-tag">CSS3</span>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <div class="skill-cat-title">Databases</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Oracle</span>
+        <span class="skill-tag">PostgreSQL</span>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <div class="skill-cat-title">Tools &amp; Practices</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">Agile / Scrum</span>
+        <span class="skill-tag">Debugging</span>
+        <span class="skill-tag">Performance Optimization</span>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <div class="skill-cat-title">Concepts</div>
+      <div class="skill-tags">
+        <span class="skill-tag">OOP</span>
+        <span class="skill-tag">Collections</span>
+        <span class="skill-tag">Multithreading</span>
+        <span class="skill-tag">Java Memory Management</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label reveal">Work</div>
+  <h2 class="section-title reveal">Featured Projects</h2>
+  <p class="section-desc reveal">Full-stack applications built during intensive training, focused on real-world use cases.</p>
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <span class="project-num">01 — PROJECT</span>
+      <div class="project-title">Redink</div>
+      <div class="project-subtitle">Document Printing &amp; Delivery App</div>
+      <p class="project-desc">
+        A full-stack document management platform featuring a dynamic cost calculator for color, sides, and punch options — with backend validations to eliminate pricing errors. Includes a secure AWS S3 file upload flow and an admin dashboard that streamlines coordination.
+      </p>
+      <div class="project-stack">
+        <span class="stack-badge">Java</span>
+        <span class="stack-badge">Spring Boot</span>
+        <span class="stack-badge">SQL</span>
+        <span class="stack-badge">AWS S3</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <span class="project-num">02 — PROJECT</span>
+      <div class="project-title">AI Transcriber</div>
+      <div class="project-subtitle">Speech-to-Text Platform</div>
+      <p class="project-desc">
+        An audio transcription service powered by Spring AI and REST APIs, achieving high transcription accuracy. Features a responsive UI for audio upload and real-time transcript display, significantly improving usability for end users.
+      </p>
+      <div class="project-stack">
+        <span class="stack-badge">Java</span>
+        <span class="stack-badge">Spring Boot</span>
+        <span class="stack-badge">Spring AI</span>
+        <span class="stack-badge">SQL</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label reveal">Background</div>
+  <h2 class="section-title reveal">Education &amp; Training</h2>
+
+  <div class="timeline" style="margin-bottom: 3rem;">
+    <div class="timeline-item reveal">
+      <div class="timeline-year">2021 – 2025</div>
+      <div>
+        <div class="timeline-title">B.E. in Information Technology</div>
+        <div class="timeline-inst">Smt. Kashibai Navale College of Engineering, Pune</div>
+        <span class="timeline-grade">CGPA: 6.97 / 10</span>
+      </div>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-year">2020</div>
+      <div>
+        <div class="timeline-title">Higher Secondary (12th)</div>
+        <div class="timeline-inst">St. Xavier's International School, Burhanpur (M.P.)</div>
+        <span class="timeline-grade">76.4%</span>
+      </div>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-year">Sep – Nov 2025</div>
+      <div>
+        <div class="timeline-title">Java Full Stack Developer Training</div>
+        <div class="timeline-inst">Naresh IT, Hyderabad</div>
+        <span class="timeline-grade">Core Java · Spring Boot · React · REST APIs</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label reveal">Certifications</div>
+  <h3 class="section-title reveal" style="font-size:1.5rem; margin-bottom:1.5rem;">Credentials</h3>
+  <div class="certs-grid">
+    <div class="cert-card reveal">
+      <div class="cert-icon">🏆</div>
+      <div>
+        <div class="cert-name">Java Full Stack Development Certification</div>
+        <div class="cert-issuer">Naresh IT, Hyderabad — 2025</div>
+      </div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-icon">✅</div>
+      <div>
+        <div class="cert-name">Java Programming Certification</div>
+        <div class="cert-issuer">HackerRank — 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="contact-layout">
+    <div class="reveal">
+      <div class="section-label">Let's connect</div>
+      <h2 class="section-title">Open to full-time opportunities</h2>
+      <p style="color:var(--muted); line-height:1.8;">
+        I'm actively seeking a full-time Java Full Stack Developer role. If you're looking for someone who's eager, technically sharp, and passionate about building great software — let's talk.
+      </p>
+    </div>
+    <div class="contact-links reveal">
+      <a class="contact-link" href="mailto:gauranshkate.it@gmail.com">
+        <div class="contact-link-icon">✉️</div>
+        <div>
+          <div class="contact-link-label">Email</div>
+          <div class="contact-link-val">gauranshkate.it@gmail.com</div>
+        </div>
+      </a>
+      <a class="contact-link" href="tel:+918815383700">
+        <div class="contact-link-icon">📞</div>
+        <div>
+          <div class="contact-link-label">Phone</div>
+          <div class="contact-link-val">+91 88153 83700</div>
+        </div>
+      </a>
+      <div class="contact-link" style="cursor:default;">
+        <div class="contact-link-icon">📍</div>
+        <div>
+          <div class="contact-link-label">Location</div>
+          <div class="contact-link-val">Hyderabad, Telangana</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Gauransh Kate</span>
+  <span>Built with ♥ · Java Full Stack Developer</span>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

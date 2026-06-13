@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gauransh Kate // Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fffeee;
+      --text: #000000;
+      --primary: #ffde47;
+      --secondary: #45ffca;
+      --accent: #fe6244;
+      --border-thickness: 4px;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      line-height: 1.5;
+      padding: 2rem;
+    }
+    
+    .container {
+      max-width: 950px;
+      margin: 0 auto;
+    }
+    
+    /* Navigation Bar */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem;
+      background: white;
+      border: var(--border-thickness) solid #000;
+      box-shadow: 6px 6px 0px #000;
+      margin-bottom: 4rem;
+    }
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+    .social-links a {
+      color: #000;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 0.4rem 0.8rem;
+      background: var(--secondary);
+      border: 2px solid #000;
+      box-shadow: 2px 2px 0px #000;
+      font-size: 0.9rem;
+      transition: all 0.15s;
+    }
+    .social-links a:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 4px 4px 0px #000;
+    }
+    .social-links a:active {
+      transform: translate(2px, 2px);
+      box-shadow: 0px 0px 0px #000;
+    }
+    
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 200px;
+      gap: 2rem;
+      align-items: center;
+      background: var(--primary);
+      border: var(--border-thickness) solid #000;
+      padding: 3rem;
+      box-shadow: 8px 8px 0px #000;
+      margin-bottom: 4rem;
+    }
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+      }
+      .hero-avatar {
+        order: -1;
+        justify-self: center;
+      }
+      .projects-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+    .hero-content h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .hero-content h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      background: white;
+      display: inline-block;
+      padding: 0.2rem 0.8rem;
+      border: 2px solid #000;
+      margin-bottom: 1.5rem;
+    }
+    .hero-content p {
+      font-size: 1.15rem;
+      font-weight: 500;
+    }
+    .hero-avatar img {
+      width: 200px;
+      height: 200px;
+      border: var(--border-thickness) solid #000;
+      box-shadow: 6px 6px 0px #000;
+      object-fit: cover;
+      background: white;
+    }
+    
+    /* Section Defaults */
+    section {
+      margin-bottom: 4rem;
+    }
+    section h2.sec-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 2rem;
+      background: #000;
+      color: white;
+      display: inline-block;
+      padding: 0.2rem 1.2rem;
+      transform: rotate(-1deg);
+    }
+    
+    /* Neo Brutalism Card */
+    .neo-card {
+      background: white;
+      border: var(--border-thickness) solid #000;
+      padding: 2rem;
+      box-shadow: 6px 6px 0px #000;
+      transition: all 0.2s;
+      margin-bottom: 2rem;
+    }
+    .neo-card:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 10px 10px 0px #000;
+    }
+    
+    /* Buttons */
+    .neo-btn {
+      display: inline-block;
+      text-decoration: none;
+      color: #000;
+      background: var(--accent);
+      color: white;
+      font-weight: 700;
+      font-family: 'Syne', sans-serif;
+      padding: 0.8rem 2rem;
+      border: var(--border-thickness) solid #000;
+      box-shadow: 4px 4px 0px #000;
+      transition: all 0.15s;
+      cursor: pointer;
+    }
+    .neo-btn:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 7px 7px 0px #000;
+    }
+    .neo-btn:active {
+      transform: translate(3px, 3px);
+      box-shadow: 0px 0px 0px #000;
+    }
+    .btn-sm {
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+      box-shadow: 3px 3px 0px #000;
+    }
+    .btn-sm:hover {
+      box-shadow: 5px 5px 0px #000;
+    }
+    
+    /* Skills */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .skill-tag {
+      background: var(--secondary);
+      border: 3px solid #000;
+      color: #000;
+      font-weight: 700;
+      padding: 0.6rem 1.2rem;
+      box-shadow: 4px 4px 0px #000;
+    }
+    
+    /* Timeline / Work Experience */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+    }
+    .timeline-item {
+      position: relative;
+    }
+    .date-badge {
+      display: inline-block;
+      background: #000;
+      color: white;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.1rem 0.6rem;
+      margin-bottom: 1rem;
+    }
+    .timeline-item h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+    .timeline-item h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .timeline-item p {
+      font-weight: 500;
+    }
+    
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .project-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+    .project-card p {
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+    }
+    .proj-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .proj-tag {
+      background: var(--bg);
+      border: 2px solid #000;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    
+    /* Contact */
+    .contact-card {
+      text-align: center;
+      background: var(--secondary);
+    }
+    .contact-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .contact-card p {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 2rem;
+    }
+    .contact-details {
+      margin-top: 1.5rem;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      border-top: var(--border-thickness) solid #000;
+      font-weight: 700;
+      margin-top: 4rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">GAURANSH KATE</div>
+      <div class="social-links">
+        <a href="https://github.com/kategauransh" target="_blank">GITHUB</a>
+        <a href="https://linkedin.com/in/kategauransh" target="_blank">LINKEDIN</a>
+        <a href="https://twitter.com/kategauransh" target="_blank">TWITTER</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h2>HI! I AM A BACKEND & AI AUTOMATION ENGINEER</h2>
+        <h1>Gauransh Kate</h1>
+        <p>I build high-throughput backend services and resilient web automation engines that replace manual bottlenecks with secure, production-ready systems.</p>
+      </div>
+      <div class="hero-avatar">
+        <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=250" alt="Gauransh Kate">
+      </div>
+    </section>
+
+    
+    <section id="skills">
+      <h2 class="sec-title">CORE EXPERTISE</h2>
+      <div class="skills-grid">
+        <span class="skill-tag">Java (Spring Boot)</span><span class="skill-tag">Spring Security (OAuth2/JWT)</span><span class="skill-tag">Python (Django)</span><span class="skill-tag">PostgreSQL / DB Design</span><span class="skill-tag">Playwright / Selenium</span><span class="skill-tag">Undetected Chromedriver</span><span class="skill-tag">LLM Integration (Gemini/OpenAI)</span><span class="skill-tag">Docker / Containerization</span>
+      </div>
+    </section>
+    
+
+    
+    <section id="projects">
+      <h2 class="sec-title">FEATURED WORK</h2>
+      <div class="projects-grid">
+        
+          <div class="neo-card project-card">
+            <h3>OpenOutreach</h3>
+            <div class="project-desc"><div class="proj-field"><strong class="">Problem:</strong> B2B lead generation is highly manual and prone to IP/account bans.</div><div class="proj-field"><strong class="">Role:</strong> Core Developer (Backend, Scraper & Bayesian ML Engine).</div><div class="proj-field"><strong class="">Stack:</strong> Python, Django, Playwright (Stealth), Scikit-Learn, Docker.</div><div class="proj-field"><strong class="">Outcome:</strong> Autonomously crawls, qualifies, and contacts B2B leads using active learning (Gaussian Processes) to optimize lead selection, saving 92% of pipeline discovery time.</div></div>
+            <div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">Django</span><span class="proj-tag">Playwright</span><span class="proj-tag">Scikit-Learn</span></div>
+            <a href="https://github.com/kategauransh/OpenOutreach-main" target="_blank" class="neo-btn btn-sm">VIEW REPO</a>
+          </div>
+        
+          <div class="neo-card project-card">
+            <h3>LinkedFlow Agent</h3>
+            <div class="project-desc"><div class="proj-field"><strong class="">Problem:</strong> Repetitive job application form filling and lack of cover letter customization.</div><div class="proj-field"><strong class="">Role:</strong> Creator & Solo Developer.</div><div class="proj-field"><strong class="">Stack:</strong> Python, Selenium (Undetected-Chromedriver), Flask, OpenAI API.</div><div class="proj-field"><strong class="">Outcome:</strong> Built a bot that crawls job postings, generates tailored resumes/cover letters via LLM context, and auto-submits, scaling processing speed to 100+ customized jobs/hour.</div></div>
+            <div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">Selenium</span><span class="proj-tag">Flask</span><span class="proj-tag">OpenAI API</span></div>
+            <a href="https://github.com/kategauransh/Auto_job_applier_linkedIn" target="_blank" class="neo-btn btn-sm">VIEW REPO</a>
+          </div>
+        
+          <div class="neo-card project-card">
+            <h3>Spring CryptGuard</h3>
+            <div class="project-desc"><div class="proj-field"><strong class="">Problem:</strong> Standard stateless JWT gateways lack token revocation and replay defense.</div><div class="proj-field"><strong class="">Role:</strong> Backend Architect & Developer.</div><div class="proj-field"><strong class="">Stack:</strong> Java, Spring Boot, Spring Security, JWT, PostgreSQL, React, JMeter.</div><div class="proj-field"><strong class="">Outcome:</strong> Designed a gateway featuring sliding-window token rotation and replay protection, benchmarked via JMeter to handle 2,500+ TPS with sub-15ms latencies.</div></div>
+            <div class="proj-tags"><span class="proj-tag">Java</span><span class="proj-tag">Spring Security</span><span class="proj-tag">JWT</span><span class="proj-tag">PostgreSQL</span></div>
+            <a href="https://github.com/kategauransh/JWT-Authentication-System" target="_blank" class="neo-btn btn-sm">VIEW REPO</a>
+          </div>
+        
+      </div>
+    </section>
+    
+
+    
+    <section id="experience">
+      <h2 class="sec-title">WORK HISTORY</h2>
+      <div class="timeline">
+        
+        <div class="neo-card timeline-item">
+          <span class="date-badge">June 2024 - November 2024</span>
+          <h3>Software Engineering Intern</h3>
+          <h4>Tech Solutions</h4>
+          <div class="timeline-desc"><ul class="experience-list"><li>Engineered 12+ RESTful microservice API endpoints in Node.js/Express, reducing average response latencies by 30% through targeted PostgreSQL indexing.</li><li>Authored 90+ integration tests using Jest, expanding test coverage from 60% to 92% and preventing 15+ pre-release security issues.</li><li>Performed token validation audits to secure routing paths across internal developer services.</li></ul></div>
+        </div>
+      
+        <div class="neo-card timeline-item">
+          <span class="date-badge">2023 - Present</span>
+          <h3>Core Open-Source Contributor</h3>
+          <h4>GitHub / Community</h4>
+          <div class="timeline-desc"><ul class="experience-list"><li>Integrated active learning models (Gaussian Processes) into OpenOutreach CRM to rank B2B leads by profile embeddings, improving discovery efficiency.</li><li>Programmed bot-stealth measures (rotating user-agents, token-bucket rate limits) for browser scrapers, achieving ~0% block rates on LinkedIn.</li><li>Built and open-sourced automation tools to help developers automate manual workflow overhead.</li></ul></div>
+        </div>
+      
+      </div>
+    </section>
+    
+
+    
+    <section id="education">
+      <h2 class="sec-title">EDUCATION</h2>
+      <div class="timeline">
+        
+        <div class="neo-card timeline-item">
+          <span class="date-badge">2021 - 2025</span>
+          <h3>Bachelor of Engineering in Information Technology</h3>
+          <h4>Shrimati Kashibai Navale College of Engineering</h4>
+          <div class="timeline-desc"><p>Deep study of Operating Systems, Data Structures & Algorithms, Database Management Systems, and Network Security.</p></div>
+        </div>
+      
+        <div class="neo-card timeline-item">
+          <span class="date-badge">Sept 2025 - April 2026</span>
+          <h3>Professional Software Training (Full Stack & Java Security)</h3>
+          <h4>Naresh I Technologies, Hyderabad</h4>
+          <div class="timeline-desc"><p>Hands-on training in Java, Spring Boot, Spring Security (JWT), SQL, web fundamentals, and system design.</p></div>
+        </div>
+      
+      </div>
+    </section>
+    
+
+    <section id="contact">
+      <div class="neo-card contact-card">
+        <h3>LET'S WORK TOGETHER!</h3>
+        <p>I am currently available for full-time contracts, consulting, or general inquiries.</p>
+        <a href="mailto:kategauransh@gmail.com" class="neo-btn">EMAIL ME NOW</a>
+        
+        <div class="contact-details">
+          <div>TEL: +91 98765 43210</div>
+          <div>LOC: Pune, India</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2026 GAURANSH KATE // ALL RIGHTS RESERVED.</p>
+    </footer>
+  </div>
+</body>
+</html>
